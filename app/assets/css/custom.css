@@ -1,0 +1,18 @@
+body{
+	padding-top: 20%;
+	font-family: "Courier New", Courier, monospace;
+	background: #EC7063;
+	color: #fff;
+}
+h1, div{
+	text-align: center;
+}
+.errors{
+	font-size: 100px;
+}
+input{
+	color: black;
+}
+button{
+	color: #EC7063
+}
