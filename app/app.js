@@ -1,9 +1,9 @@
 var express     = require('express'),
     http        = require('http'),
-    stage      = require('./config/stage')(),
+    stage       = require('./config/stage')(),
+    conn        = require('./config/db_conn'),
     path        = require('path'),
     bodyParser  = require('body-parser'),
-    mongoose    = require('mongoose'),
     app         = express();
 
 						// DECLARE ROUTES
@@ -19,9 +19,11 @@ app.use(express.static(path.join(__dirname, 'assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+
                         // USE ROUTES
 app.use('/', routes);
 app.use('/users', users);
+
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -52,8 +54,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/wikinf');
+conn(); // call to db_conn constructor.
 
 http.createServer(app).listen(stage.port, function() {
     console.log('\n'+'\x1b[33m%s\x1b[0m ', ' ENV: ', "\x1b[36m", stage.mode +"\n","\x1b[31m");
