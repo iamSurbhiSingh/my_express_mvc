@@ -13,8 +13,4 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/post', function(req, res){
-	res.json( req.body);
-
-});
 module.exports = router;
