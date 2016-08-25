@@ -13,11 +13,11 @@ var routes = require('./routes/routes_index'),
 app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
 
-
 app.use(express.static(path.join(__dirname, 'assets')));
+app.use(express.static(path.join(__dirname, 'public')));            // Static public directory for user uploads if any
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({limit: '2mb'}));                           // 2mb file upload limit
+app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));     // 2mb file upload limit
 
 
                         // USE ROUTES
