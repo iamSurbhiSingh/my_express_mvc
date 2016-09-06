@@ -2,6 +2,7 @@ var express     = require('express'),
     http        = require('http'),
     stage       = require('./config/stage')(),
     conn        = require('./config/db_conn'),
+    cron        = require('./config/cron_job'),
     path        = require('path'),
     bodyParser  = require('body-parser'),
     app         = express();
@@ -54,7 +55,8 @@ app.use(function(err, req, res, next) {
     });
 });
 
-conn(); // call to db_conn constructor.
+conn();             // call to db_conn constructor.
+cron();             //  Start a cron job
 
 http.createServer(app).listen(stage.port, function() {
     console.log('\n'+'\x1b[33m%s\x1b[0m ', ' ENV: ', "\x1b[36m", stage.mode +"\n","\x1b[31m");
